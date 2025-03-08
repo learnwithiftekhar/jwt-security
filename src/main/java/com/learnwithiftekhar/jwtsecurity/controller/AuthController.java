@@ -31,14 +31,14 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@Valid @RequestBody LoginRequest loginRequest) {
-        JwtResponse jwtResponse = authService.login(loginRequest);
-        return ResponseEntity.ok(ApiResponse.success(jwtResponse, "Login successful", HttpStatus.OK));
+        TokenPair tokenPair = authService.login(loginRequest);
+        return ResponseEntity.ok(ApiResponse.success(tokenPair, "Login successful", HttpStatus.OK));
     }
 
     @PostMapping("/refresh-token")
     public ResponseEntity<?> refreshToken(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {
-        JwtResponse jwtResponse = authService.refreshToken(refreshTokenRequest.getRefreshToken());
-        return ResponseEntity.ok(ApiResponse.success(jwtResponse, "Refresh token successful", HttpStatus.OK));
+        TokenPair tokenPair = authService.refreshToken(refreshTokenRequest.getRefreshToken());
+        return ResponseEntity.ok(ApiResponse.success(tokenPair, "Refresh token successful", HttpStatus.OK));
 
     }
 }

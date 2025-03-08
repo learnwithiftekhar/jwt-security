@@ -1,6 +1,5 @@
 package com.learnwithiftekhar.jwtsecurity.service;
 
-import com.learnwithiftekhar.jwtsecurity.dto.JwtResponse;
 import com.learnwithiftekhar.jwtsecurity.dto.LoginRequest;
 import com.learnwithiftekhar.jwtsecurity.dto.RegisterRequest;
 import com.learnwithiftekhar.jwtsecurity.dto.TokenPair;
@@ -8,8 +7,6 @@ import com.learnwithiftekhar.jwtsecurity.jwt.JwtProvider;
 import com.learnwithiftekhar.jwtsecurity.model.User;
 import com.learnwithiftekhar.jwtsecurity.repository.UserRepository;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -54,7 +51,7 @@ public class AuthService {
     }
 
     @Transactional
-    public JwtResponse login(LoginRequest loginRequest) {
+    public TokenPair login(LoginRequest loginRequest) {
         // Authenticate the user
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -69,13 +66,13 @@ public class AuthService {
         // Generate JWT token pair
         TokenPair tokenPair = jwtProvider.generateTokenPair(authentication);
 
-        return new JwtResponse(
+        return new TokenPair(
                 tokenPair.getAccessToken(),
                 tokenPair.getRefreshToken()
         );
     }
 
-    public JwtResponse refreshToken(String refreshToken) {
+    public TokenPair refreshToken(String refreshToken) {
         // verify if it is refresh token
         if(jwtProvider.isRefreshToken(refreshToken)) {
             throw new IllegalArgumentException("Invalid refresh token");
@@ -96,7 +93,7 @@ public class AuthService {
 
         String newAccessToken = jwtProvider.generateAccessToken(authentication);
 
-        return new JwtResponse(
+        return new TokenPair(
                 newAccessToken,
                 refreshToken
         );
