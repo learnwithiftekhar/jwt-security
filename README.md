@@ -34,7 +34,7 @@ This project demonstrates a secure REST API built with Spring Boot, utilizing JS
 
 2.  **Clone the repository:**
     ```bash
-    git clone <your-repository-url>
+    git clone https://github.com/learnwithiftekhar/jwt-security
     cd jwt-security
     ```
 
