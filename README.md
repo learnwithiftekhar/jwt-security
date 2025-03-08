@@ -23,12 +23,12 @@ This project demonstrates a secure REST API built with Spring Boot, utilizing JS
 *   **io.jsonwebtoken (JJWT):** A library for creating and parsing JWTs.
 *   **Lombok:** Reduces boilerplate code.
 *   **Maven:** Build tool for dependency management and project building.
-* Java 21
+* Java 17 or higher
 
 ## Setup and Installation
 
 1.  **Prerequisites:**
-    *   Java Development Kit (JDK) 21
+    *   Java Development Kit (JDK) 17 or higher
     *   Maven
     *   PostgreSQL database installed and running.
 
