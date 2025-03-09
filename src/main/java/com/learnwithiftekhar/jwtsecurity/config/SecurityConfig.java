@@ -1,6 +1,6 @@
 package com.learnwithiftekhar.jwtsecurity.config;
 
-import com.learnwithiftekhar.jwtsecurity.jwt.JwtAuthenticationFilter;
+import com.learnwithiftekhar.jwtsecurity.filter.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -1,4 +1,4 @@
-package com.learnwithiftekhar.jwtsecurity.jwt;
+package com.learnwithiftekhar.jwtsecurity.filter;
 
 import com.learnwithiftekhar.jwtsecurity.service.JwtService;
 import jakarta.servlet.FilterChain;
