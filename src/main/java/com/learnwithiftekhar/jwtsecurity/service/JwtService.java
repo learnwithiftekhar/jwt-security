@@ -1,4 +1,4 @@
-package com.learnwithiftekhar.jwtsecurity.jwt;
+package com.learnwithiftekhar.jwtsecurity.service;
 
 import com.learnwithiftekhar.jwtsecurity.dto.TokenPair;
 import io.jsonwebtoken.*;

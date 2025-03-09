@@ -3,7 +3,6 @@ package com.learnwithiftekhar.jwtsecurity.service;
 import com.learnwithiftekhar.jwtsecurity.dto.LoginRequest;
 import com.learnwithiftekhar.jwtsecurity.dto.RegisterRequest;
 import com.learnwithiftekhar.jwtsecurity.dto.TokenPair;
-import com.learnwithiftekhar.jwtsecurity.jwt.JwtService;
 import com.learnwithiftekhar.jwtsecurity.model.User;
 import com.learnwithiftekhar.jwtsecurity.repository.UserRepository;
 import jakarta.transaction.Transactional;
