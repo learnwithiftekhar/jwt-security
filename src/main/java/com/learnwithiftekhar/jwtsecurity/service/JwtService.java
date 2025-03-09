@@ -40,7 +40,7 @@ public class JwtService {
 
     // Generate access token
     public String generateAccessToken(Authentication authentication) {
-        return generateToken(authentication, refreshExpirationMs, new HashMap<>());
+        return generateToken(authentication, jwtExpirationMs, new HashMap<>());
     }
 
     // generate refresh token
