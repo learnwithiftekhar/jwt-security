@@ -3,7 +3,7 @@ package com.learnwithiftekhar.jwtsecurity.service;
 import com.learnwithiftekhar.jwtsecurity.dto.LoginRequest;
 import com.learnwithiftekhar.jwtsecurity.dto.RegisterRequest;
 import com.learnwithiftekhar.jwtsecurity.dto.TokenPair;
-import com.learnwithiftekhar.jwtsecurity.jwt.JwtProvider;
+import com.learnwithiftekhar.jwtsecurity.jwt.JwtService;
 import com.learnwithiftekhar.jwtsecurity.model.User;
 import com.learnwithiftekhar.jwtsecurity.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -21,14 +21,18 @@ public class AuthService {
     private final UserRepository userRepository;
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
-    private final JwtProvider jwtProvider;
+    private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    public AuthService(UserRepository userRepository, UserDetailsService userDetailsService, PasswordEncoder passwordEncoder, JwtProvider jwtProvider, AuthenticationManager authenticationManager) {
+    public AuthService(UserRepository userRepository,
+                       UserDetailsService userDetailsService,
+                       PasswordEncoder passwordEncoder,
+                       JwtService jwtService,
+                       AuthenticationManager authenticationManager) {
         this.userRepository = userRepository;
         this.userDetailsService = userDetailsService;
         this.passwordEncoder = passwordEncoder;
-        this.jwtProvider = jwtProvider;
+        this.jwtService = jwtService;
         this.authenticationManager = authenticationManager;
     }
 
@@ -64,7 +68,7 @@ public class AuthService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         // Generate JWT token pair
-        TokenPair tokenPair = jwtProvider.generateTokenPair(authentication);
+        TokenPair tokenPair = jwtService.generateTokenPair(authentication);
 
         return new TokenPair(
                 tokenPair.getAccessToken(),
@@ -74,12 +78,12 @@ public class AuthService {
 
     public TokenPair refreshToken(String refreshToken) {
         // verify if it is refresh token
-        if(jwtProvider.isRefreshToken(refreshToken)) {
+        if(jwtService.isRefreshToken(refreshToken)) {
             throw new IllegalArgumentException("Invalid refresh token");
         }
 
         // extract username from refresh token
-        String username = jwtProvider.extractUsernameFromToken(refreshToken);
+        String username = jwtService.extractUsernameFromToken(refreshToken);
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
@@ -91,7 +95,7 @@ public class AuthService {
         UsernamePasswordAuthenticationToken authentication =
                 new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 
-        String newAccessToken = jwtProvider.generateAccessToken(authentication);
+        String newAccessToken = jwtService.generateAccessToken(authentication);
 
         return new TokenPair(
                 newAccessToken,

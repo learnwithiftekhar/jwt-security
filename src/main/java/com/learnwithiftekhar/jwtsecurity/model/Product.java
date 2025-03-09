@@ -46,11 +46,11 @@ public class Product {
         this.updatedAt = LocalDateTime.now();
     }
 
-    public Product(String name, String description, BigDecimal price, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
+//    public Product(String name, String description, BigDecimal price, LocalDateTime createdAt, LocalDateTime updatedAt) {
+//        this.name = name;
+//        this.description = description;
+//        this.price = price;
+//        this.createdAt = createdAt;
+//        this.updatedAt = updatedAt;
+//    }
 }
